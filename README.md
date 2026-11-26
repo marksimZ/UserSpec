@@ -55,11 +55,7 @@ We ran a controlled, read-only A/B test on [`marksimZ/CortexOS`](https://github.
 | Runtime visual, clipping & mobile defects caught | 0 | **11 missed by code review** (14 total) |
 | `F5`-free cross-view linkage flows verified | 0 | **10 executed** (`8 PASS`, `2 content-FAIL`) |
 
-| Settings text clipping & double sidebar (`#/settings`) | Sticky popover occluding mobile composer (`390×844`) |
-| :---: | :---: |
-| <img src="benchmarks/cortexos-201da2b/screenshots/settings-text-clipping.png" width="440" alt="Rendered helper text clipped horizontally above Save button in Settings"> | <img src="benchmarks/cortexos-201da2b/screenshots/mobile-popover-occlusion.png" width="220" alt="Help popover covering the entire mobile composer"> |
-
-> Code review excelled at static state-wiring issues, while **UserSpec caught 11 live rendered and interaction defects (79% of its findings) that reading the entire source tree missed** — and honestly reported browser-preview CRUD boundaries instead of hallucinating a pass. Full evidence and linkage matrix: **[benchmarks/FIELD_STUDY.md](benchmarks/FIELD_STUDY.md)**.
+> **What reading the full source tree missed:** Static code review excelled at internal state-wiring bugs, while **UserSpec's blind browser lab caught 11 live rendered and interaction defects (79% of its findings)** — including horizontal text clipping in Settings (`生成参数`), a sticky shortcut popover occluding the entire `390×844` mobile composer, double-sidebar collisions on `#/settings`, an unlabeled `27×15px` mobile status icon, orphaned 2-character line wraps, and empty-stub preview CTAs — while honestly marking browser-preview CRUD persistence as `N/A` instead of hallucinating a pass.
 
 ---
 
