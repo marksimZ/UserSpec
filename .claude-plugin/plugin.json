@@ -1,7 +1,7 @@
 {
   "name": "userspec",
-  "description": "Puts a zero-context first-time user inside your AI agent: 5-second blind comprehension audit, hard first-impression gate, and F5-free cross-view state linkage testing.",
-  "version": "1.1.0",
+  "description": "Zero-context usability lab skill for AI coding agents: blind 5-second first-impression gate, visual/readability checks, and F5-free cross-view state linkage testing.",
+  "version": "1.2.0",
   "author": {
     "name": "marksimZ",
     "url": "https://github.com/marksimZ"
