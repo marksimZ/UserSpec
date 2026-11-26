@@ -22,6 +22,12 @@
 
 ---
 
+**Meet Test Subject #01.** Sage sweater. Iced milk tea in one hand, your app open in the other. He isn't trying to break your product—he just tapped a link a friend sent him between errands. He pauses at your landing screen with a polite, slightly puzzled look, taps once, waits a beat when the counter doesn't move, and quietly switches back to his messages.
+
+**UserSpec brings him into your test loop—before real users leave without filing a bug.**
+
+---
+
 ## Why blind isolation matters
 
 When an AI coding agent inspects a product's UX in the same session where it reads `README.md`, `package.json`, and `src/routes.tsx`, **context contamination** invalidates the test immediately. An agent that already knows the codebase understands internal acronyms, knows where secondary controls are hidden, and unconsciously forgives stale UI state.
