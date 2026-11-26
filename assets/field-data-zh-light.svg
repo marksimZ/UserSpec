@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 390" width="920" height="390" role="img" aria-label="UserSpec 真实项目 A/B 实测数据看板">
+  <defs>
+    <style>
+      .outer { fill: #faf6f0; stroke: #e5ddd0; stroke-width: 1.5; rx: 18; }
+      .panel-hero { fill: #ffffff; stroke: #e8dfd3; stroke-width: 1.25; rx: 14; }
+      .panel-kpi { fill: #ffffff; stroke: #e8dfd3; stroke-width: 1.25; rx: 12; }
+      .pill-bg { fill: #f3eae0; stroke: #e2d5c5; stroke-width: 1; rx: 11; }
+      .pill-accent { fill: #fbeae3; stroke: #efc9b8; stroke-width: 1; rx: 11; }
+      .pill-sage { fill: #e6f2ef; stroke: #c2dfd7; stroke-width: 1; rx: 11; }
+      .eyebrow { font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif; font-size: 11.5px; font-weight: 700; fill: #6b7280; letter-spacing: 0.04em; }
+      .eyebrow-accent { font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif; font-size: 11px; font-weight: 700; fill: #b04b2b; }
+      .eyebrow-sage { font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif; font-size: 11px; font-weight: 700; fill: #245c50; }
+      .hero-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; font-size: 64px; font-weight: 800; fill: #c25e3e; letter-spacing: -0.03em; }
+      .hero-frac { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 15px; font-weight: 700; fill: #4b5563; }
+      .kpi-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; font-size: 36px; font-weight: 800; fill: #1f2937; letter-spacing: -0.02em; }
+      .kpi-num-sage { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; font-size: 36px; font-weight: 800; fill: #2f6f62; letter-spacing: -0.02em; }
+      .kpi-title { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 13.5px; font-weight: 700; fill: #1f2937; }
+      .sub { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 12.5px; fill: #4b5563; }
+      .muted { font-family: "PingFang SC", "Microsoft YaHei", ui-monospace, sans-serif; font-size: 11.5px; fill: #6b7280; }
+      .tag-txt { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 11.5px; font-weight: 600; fill: #374151; }
+      .bar-track { fill: #efe8dd; rx: 5; }
+      .bar-fill { fill: #c25e3e; rx: 5; }
+      .bar-base { fill: #cbd5e1; rx: 5; }
+    </style>
+  </defs>
+
+  <rect class="outer" x="1" y="1" width="918" height="388"/>
+
+  <!-- Top Header Strip -->
+  <circle cx="34" cy="34" r="5" fill="#c25e3e"/>
+  <text class="eyebrow" x="48" y="38">可用性实验室 · 真实项目 A/B 对照实测</text>
+  <rect class="pill-sage" x="628" y="21" width="120" height="24"/>
+  <text class="eyebrow-sage" x="688" y="37" text-anchor="middle">零源码盲测隔离</text>
+  <rect class="pill-bg" x="758" y="21" width="136" height="24"/>
+  <text class="eyebrow" x="826" y="37" text-anchor="middle">1440px · 390px</text>
+
+  <!-- Left Hero KPI Card -->
+  <rect class="panel-hero" x="26" y="60" width="414" height="244"/>
+  <rect class="pill-accent" x="46" y="78" width="176" height="22"/>
+  <text class="eyebrow-accent" x="134" y="93" text-anchor="middle">被普通读码审查完全漏掉</text>
+
+  <text class="hero-num" x="46" y="166">79%</text>
+  <text class="hero-frac" x="196" y="156">11 / 14 条实机缺陷</text>
+  <text class="sub" x="46" y="194">UserSpec 捕获的实机渲染、移动端与交互缺陷中，</text>
+  <text class="sub" x="46" y="213">读完整个源码仓库的普通 AI 代理一条也未发现。</text>
+
+  <!-- Comparison Bars -->
+  <text class="muted" x="46" y="244">UserSpec 零先验盲测（实机视觉与交互缺陷）</text>
+  <text class="muted" x="420" y="244" text-anchor="end" fill="#c25e3e" font-weight="700">独有 11 条</text>
+  <rect class="bar-track" x="46" y="252" width="374" height="10"/>
+  <rect class="bar-fill" x="46" y="252" width="295" height="10"/>
+
+  <text class="muted" x="46" y="281">普通读码 AI 审查（实机视觉与交互缺陷）</text>
+  <text class="muted" x="420" y="281" text-anchor="end">0 条</text>
+  <rect class="bar-track" x="46" y="288" width="374" height="7"/>
+  <rect class="bar-base" x="46" y="288" width="10" height="7"/>
+
+  <!-- Right 3 Bento KPI Cards -->
+  <rect class="panel-kpi" x="456" y="60" width="212" height="114"/>
+  <text class="kpi-num-sage" x="476" y="112">0</text>
+  <text class="kpi-title" x="476" y="136">首屏前读取源码数</text>
+  <text class="muted" x="476" y="156">对照组：完整 README + 源码</text>
+
+  <rect class="panel-kpi" x="682" y="60" width="212" height="114"/>
+  <text class="kpi-num" x="702" y="112">19</text>
+  <text class="kpi-title" x="702" y="136">实机取证截图（张）</text>
+  <text class="muted" x="702" y="156">对照组：0 张实机渲染核验</text>
+
+  <rect class="panel-kpi" x="456" y="188" width="438" height="116"/>
+  <text class="kpi-num" x="476" y="240">10</text>
+  <text class="kpi-title" x="536" y="224">禁用 F5 跨界面联动链路实测（条）</text>
+  <text class="sub" x="536" y="246">8 条通过 · 2 条内容空壳失败 · 0 条脑补通过</text>
+  <text class="muted" x="476" y="282">对照组实测：0 条  |  预览模式下受限的 CRUD 如实标注 N/A</text>
+
+  <!-- Bottom Caught Blind-Spots Strip -->
+  <text class="eyebrow" x="28" y="346">独有捕获盲区：</text>
+  <rect class="pill-bg" x="128" y="329" width="144" height="26"/>
+  <text class="tag-txt" x="200" y="346" text-anchor="middle">设置页文字腰斩截断</text>
+
+  <rect class="pill-bg" x="282" y="329" width="174" height="26"/>
+  <text class="tag-txt" x="369" y="346" text-anchor="middle">手机端浮层遮死输入框</text>
+
+  <rect class="pill-bg" x="466" y="329" width="136" height="26"/>
+  <text class="tag-txt" x="534" y="346" text-anchor="middle">设置页双侧栏挤压</text>
+
+  <rect class="pill-bg" x="612" y="329" width="282" height="26"/>
+  <text class="tag-txt" x="753" y="346" text-anchor="middle">无文字状态图标 · 孤行换行 · 空壳按钮</text>
+
+  <text class="muted" x="28" y="374">实测对象：多视图 AI 工作台应用（只读对照） · 桌面 1440×900 与手机 390×844 双视口实测 · 未修改目标代码</text>
+</svg>

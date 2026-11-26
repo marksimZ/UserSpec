@@ -48,12 +48,12 @@ When an AI coding agent inspects a product's UX in the same session where it rea
 
 Controlled read-only A/B test on a multi-view AI workspace app, comparing a **Code-Aware Baseline** (reading the repo's `README` and UI source code) against **UserSpec's Blind Usability Lab** (given only a bare local URL, `0` repo files read):
 
-| Metric | Code-Aware Baseline | UserSpec Blind Lab |
-| :--- | :---: | :---: |
-| Source files read before first impression | Full repo (`README` + UI source) | **0** (bare URL only) |
-| Real screenshots inspected (`1440×900` & `390×844`) | 0 | **19** |
-| Runtime visual, clipping & mobile defects caught | 0 | **11 missed by code review** (14 total) |
-| `F5`-free cross-view linkage flows verified | 0 | **10 executed** (`8 PASS`, `2 content-FAIL`) |
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/field-data-en-dark.svg">
+    <img src="assets/field-data-en-light.svg" width="900" alt="UserSpec Real-World A/B Field Data: 79% (11 of 14) runtime visual, mobile, and interaction defects caught by UserSpec were missed by code-aware review; 0 source files read, 19 screenshots inspected, 10 F5-free linkage flows verified.">
+  </picture>
+</p>
 
 > **What reading the full source tree missed:** Static code review excelled at internal state-wiring bugs, while **UserSpec's blind browser lab caught 11 live rendered and interaction defects (79% of its findings)** — including horizontal text clipping inside an expanded settings panel, a sticky shortcut popover occluding the entire `390×844` mobile composer, double-sidebar layout collisions on settings views, an unlabeled `27×15px` mobile status icon, orphaned 2-character line wraps, and empty-stub preview CTAs — while honestly marking preview-restricted CRUD persistence as `N/A` instead of hallucinating a pass.
 
@@ -98,11 +98,12 @@ Once Stage 1 clears, the tester navigates organically without documentation and 
 
 Specify an audit depth mode inline when invoking UserSpec:
 
-| Mode | Scope | Code Edits |
-| :--- | :--- | :--- |
-| **`glance`** | Stage 1 rapid 5-second comprehension, visual craft, and readability screen on the entry view. | Report only |
-| **`gate`** *(default)* | Full blind subagent isolation, hard Stage 1 confirmation & fresh-subject retest gate, and Stage 2 fluency + 5+ `F5`-free linkage chains. | User-approved fixes per stage |
-| **`stress`** | Everything in `gate`, plus exhaustive multi-viewport/resize stress, double-submit, `0 → 1 → N → 0` overflow across linked surfaces, and simplification/removal proposals for confusing UI controls. | User-approved fixes per stage |
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/modes-en-dark.svg">
+    <img src="assets/modes-en-light.svg" width="900" alt="UserSpec Audit Depth Modes: glance (5-second entry screen, report only), gate (default two-stage hard gate with fresh-subject retest and 5+ F5-free linkage chains), and stress (exhaustive resize, double-submit, 0-1-N-0 boundary, and UI pruning proposals).">
+  </picture>
+</p>
 
 Every audit reply concludes with a standardized **Usability Lab Receipt** documenting test isolation, verified surfaces, and remaining risk boundaries:
 

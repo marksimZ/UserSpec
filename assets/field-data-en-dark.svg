@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 390" width="920" height="390" role="img" aria-label="UserSpec Real-World A/B Field Data Scorecard (Dark)">
+  <defs>
+    <style>
+      .outer { fill: #16181d; stroke: #2c313c; stroke-width: 1.5; rx: 18; }
+      .panel-hero { fill: #1d2027; stroke: #313744; stroke-width: 1.25; rx: 14; }
+      .panel-kpi { fill: #1d2027; stroke: #313744; stroke-width: 1.25; rx: 12; }
+      .pill-bg { fill: #252932; stroke: #363c4a; stroke-width: 1; rx: 11; }
+      .pill-accent { fill: #35211a; stroke: #6e3927; stroke-width: 1; rx: 11; }
+      .pill-sage { fill: #182c28; stroke: #2c5b50; stroke-width: 1; rx: 11; }
+      .eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; font-weight: 700; fill: #9ca3af; letter-spacing: 0.08em; }
+      .eyebrow-accent { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; font-weight: 700; fill: #f28b66; letter-spacing: 0.05em; }
+      .eyebrow-sage { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; font-weight: 700; fill: #63c7b2; letter-spacing: 0.05em; }
+      .hero-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 64px; font-weight: 800; fill: #eb7a53; letter-spacing: -0.03em; }
+      .hero-frac { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; font-weight: 700; fill: #d1d5db; }
+      .kpi-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; fill: #f3f4f6; letter-spacing: -0.02em; }
+      .kpi-num-sage { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; fill: #5cc4ae; letter-spacing: -0.02em; }
+      .kpi-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; fill: #f3f4f6; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 12.5px; fill: #9ca3af; }
+      .muted { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; fill: #8b949e; }
+      .tag-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 11.5px; font-weight: 600; fill: #e5e7eb; }
+      .bar-track { fill: #2a2f3a; rx: 5; }
+      .bar-fill { fill: #eb7a53; rx: 5; }
+      .bar-base { fill: #4b5563; rx: 5; }
+    </style>
+  </defs>
+
+  <rect class="outer" x="1" y="1" width="918" height="388"/>
+
+  <!-- Top Header Strip -->
+  <circle cx="34" cy="34" r="5" fill="#eb7a53"/>
+  <text class="eyebrow" x="48" y="38">USABILITY LAB · CONTROLLED A/B FIELD DATA</text>
+  <rect class="pill-sage" x="598" y="21" width="150" height="24"/>
+  <text class="eyebrow-sage" x="673" y="37" text-anchor="middle">ZERO SOURCE SPOILERS</text>
+  <rect class="pill-bg" x="758" y="21" width="136" height="24"/>
+  <text class="eyebrow" x="826" y="37" text-anchor="middle">1440px · 390px</text>
+
+  <!-- Left Hero KPI Card -->
+  <rect class="panel-hero" x="26" y="60" width="414" height="244"/>
+  <rect class="pill-accent" x="46" y="78" width="194" height="22"/>
+  <text class="eyebrow-accent" x="143" y="93" text-anchor="middle">MISSED BY CODE-AWARE REVIEW</text>
+
+  <text class="hero-num" x="46" y="166">79%</text>
+  <text class="hero-frac" x="196" y="156">11 of 14 defects</text>
+  <text class="sub" x="46" y="194">Live rendered visual, mobile &amp; interaction bugs caught</text>
+  <text class="sub" x="46" y="213">by UserSpec that reading the full source tree missed.</text>
+
+  <!-- Comparison Bars -->
+  <text class="muted" x="46" y="244">UserSpec Blind Lab (runtime defects caught)</text>
+  <text class="muted" x="420" y="244" text-anchor="end" fill="#f28b66" font-weight="700">11 exclusive</text>
+  <rect class="bar-track" x="46" y="252" width="374" height="10"/>
+  <rect class="bar-fill" x="46" y="252" width="295" height="10"/>
+
+  <text class="muted" x="46" y="281">Code-Aware Baseline (runtime defects caught)</text>
+  <text class="muted" x="420" y="281" text-anchor="end">0</text>
+  <rect class="bar-track" x="46" y="288" width="374" height="7"/>
+  <rect class="bar-base" x="46" y="288" width="10" height="7"/>
+
+  <!-- Right 3 Bento KPI Cards -->
+  <rect class="panel-kpi" x="456" y="60" width="212" height="114"/>
+  <text class="kpi-num-sage" x="476" y="112">0</text>
+  <text class="kpi-title" x="476" y="136">Source files read</text>
+  <text class="muted" x="476" y="156">Baseline: Full README + src</text>
+
+  <rect class="panel-kpi" x="682" y="60" width="212" height="114"/>
+  <text class="kpi-num" x="702" y="112">19</text>
+  <text class="kpi-title" x="702" y="136">Real screenshots</text>
+  <text class="muted" x="702" y="156">Baseline: 0 inspected</text>
+
+  <rect class="panel-kpi" x="456" y="188" width="438" height="116"/>
+  <text class="kpi-num" x="476" y="240">10</text>
+  <text class="kpi-title" x="536" y="224">F5-free cross-view linkage flows verified</text>
+  <text class="sub" x="536" y="245">8 PASS · 2 content-FAIL · 0 hallucinated passes</text>
+  <text class="muted" x="476" y="282">Baseline executed: 0  |  Preview-blocked CRUD honestly marked N/A</text>
+
+  <!-- Bottom Caught Blind-Spots Strip -->
+  <text class="eyebrow" x="28" y="346">BLIND SPOTS CAUGHT:</text>
+  <rect class="pill-bg" x="180" y="329" width="144" height="26"/>
+  <text class="tag-txt" x="252" y="346" text-anchor="middle">Settings text clipping</text>
+
+  <rect class="pill-bg" x="334" y="329" width="168" height="26"/>
+  <text class="tag-txt" x="418" y="346" text-anchor="middle">Mobile popover occlusion</text>
+
+  <rect class="pill-bg" x="512" y="329" width="150" height="26"/>
+  <text class="tag-txt" x="587" y="346" text-anchor="middle">Double-sidebar clash</text>
+
+  <rect class="pill-bg" x="672" y="329" width="222" height="26"/>
+  <text class="tag-txt" x="783" y="346" text-anchor="middle">Unlabeled mobile status · stubs</text>
+
+  <text class="muted" x="28" y="374">Measured read-only on a real multi-view AI workspace app · Desktop 1440×900 &amp; Mobile 390×844 · Zero source modifications</text>
+</svg>
