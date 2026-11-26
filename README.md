@@ -44,6 +44,25 @@ When an AI coding agent inspects a product's UX in the same session where it rea
 
 ---
 
+## Real-World Field Study (`marksimZ/CortexOS`)
+
+We ran a controlled, read-only A/B test on [`marksimZ/CortexOS`](https://github.com/marksimZ/CortexOS) (`v0.2.0`, commit `201da2b`) comparing a **Code-Aware Baseline** (reading `README.md` + `apps/desktop/src/`) against **UserSpec's Blind Usability Lab** (given only `http://127.0.0.1:4175/`, `0` repo files read):
+
+| Metric | Code-Aware Baseline | UserSpec Blind Lab |
+| :--- | :---: | :---: |
+| Source files read before first impression | Full repo (`README` + `src/`) | **0** (bare URL only) |
+| Real screenshots inspected (`1440×900` & `390×844`) | 0 | **19** |
+| Runtime visual, clipping & mobile defects caught | 0 | **11 missed by code review** (14 total) |
+| `F5`-free cross-view linkage flows verified | 0 | **10 executed** (`8 PASS`, `2 content-FAIL`) |
+
+| Settings text clipping & double sidebar (`#/settings`) | Sticky popover occluding mobile composer (`390×844`) |
+| :---: | :---: |
+| <img src="benchmarks/cortexos-201da2b/screenshots/settings-text-clipping.png" width="440" alt="Rendered helper text clipped horizontally above Save button in Settings"> | <img src="benchmarks/cortexos-201da2b/screenshots/mobile-popover-occlusion.png" width="220" alt="Help popover covering the entire mobile composer"> |
+
+> Code review excelled at static state-wiring issues, while **UserSpec caught 11 live rendered and interaction defects (79% of its findings) that reading the entire source tree missed** — and honestly reported browser-preview CRUD boundaries instead of hallucinating a pass. Full evidence and linkage matrix: **[benchmarks/FIELD_STUDY.md](benchmarks/FIELD_STUDY.md)**.
+
+---
+
 ## Usability Lab Protocol
 
 <p align="center">

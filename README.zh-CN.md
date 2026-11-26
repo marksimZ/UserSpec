@@ -44,6 +44,25 @@
 
 ---
 
+## 真实项目 A/B 实测数据（`marksimZ/CortexOS`）
+
+我们在真实开源项目 [`marksimZ/CortexOS`](https://github.com/marksimZ/CortexOS)（`v0.2.0`，提交 `201da2b`）上做了一轮只读 A/B 对照实测：对比**普通读码 AI 审查**（读取 `README.md` 与 `apps/desktop/src/`）与 **UserSpec 零先验盲测实验室**（仅提供裸地址 `http://127.0.0.1:4175/`，零源码接触）：
+
+| 实测指标 | 普通读码 AI 审查（Baseline） | UserSpec 零先验盲测实验室 |
+| :--- | :---: | :---: |
+| 首屏评估前读取的源码文件数 | 完整 `README` + `src/` | **0**（仅裸 URL） |
+| 实机渲染取证截图（`1440×900` & `390×844`） | 0 张 | **19 张** |
+| 实机渲染、裁切与移动端缺陷捕获 | 0 条 | **11 条被读码审查完全漏掉**（共 14 条） |
+| 禁用 `F5` 跨界面联动链路实测 | 0 条 | **实测 10 条**（8 通过，2 内容空壳失败） |
+
+| 设置页说明文字横向腰斩截断 + 双侧栏挤压（`#/settings`） | 快捷键浮层完全遮死手机端输入框且点外不关（`390×844`） |
+| :---: | :---: |
+| <img src="benchmarks/cortexos-201da2b/screenshots/settings-text-clipping.png" width="440" alt="设置页生成参数说明文字被截断"> | <img src="benchmarks/cortexos-201da2b/screenshots/mobile-popover-occlusion.png" width="220" alt="手机端说明浮层遮挡整个输入框"> |
+
+> **核心结论**：静态读码擅长发现内部缓存与回调接线问题，而 **UserSpec 盲测捕获的 14 条实机缺陷中，有 11 条（79%）被完整读过源码的 AI 彻底漏掉**；同时对浏览器预览模式下受限的 CRUD 持久化如实标注 `N/A`，杜绝“凭空脑补通过”。完整数据与联动明细见 **[benchmarks/FIELD_STUDY.md](benchmarks/FIELD_STUDY.md)**。
+
+---
+
 ## 可用性实验室工作协议
 
 <p align="center">
