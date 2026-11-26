@@ -44,18 +44,18 @@ When an AI coding agent inspects a product's UX in the same session where it rea
 
 ---
 
-## Real-World Field Study (`marksimZ/CortexOS`)
+## Real-World A/B Field Data
 
-We ran a controlled, read-only A/B test on [`marksimZ/CortexOS`](https://github.com/marksimZ/CortexOS) (`v0.2.0`, commit `201da2b`) comparing a **Code-Aware Baseline** (reading `README.md` + `apps/desktop/src/`) against **UserSpec's Blind Usability Lab** (given only `http://127.0.0.1:4175/`, `0` repo files read):
+Controlled read-only A/B test on a multi-view AI workspace app, comparing a **Code-Aware Baseline** (reading the repo's `README` and UI source code) against **UserSpec's Blind Usability Lab** (given only a bare local URL, `0` repo files read):
 
 | Metric | Code-Aware Baseline | UserSpec Blind Lab |
 | :--- | :---: | :---: |
-| Source files read before first impression | Full repo (`README` + `src/`) | **0** (bare URL only) |
+| Source files read before first impression | Full repo (`README` + UI source) | **0** (bare URL only) |
 | Real screenshots inspected (`1440×900` & `390×844`) | 0 | **19** |
 | Runtime visual, clipping & mobile defects caught | 0 | **11 missed by code review** (14 total) |
 | `F5`-free cross-view linkage flows verified | 0 | **10 executed** (`8 PASS`, `2 content-FAIL`) |
 
-> **What reading the full source tree missed:** Static code review excelled at internal state-wiring bugs, while **UserSpec's blind browser lab caught 11 live rendered and interaction defects (79% of its findings)** — including horizontal text clipping in Settings (`生成参数`), a sticky shortcut popover occluding the entire `390×844` mobile composer, double-sidebar collisions on `#/settings`, an unlabeled `27×15px` mobile status icon, orphaned 2-character line wraps, and empty-stub preview CTAs — while honestly marking browser-preview CRUD persistence as `N/A` instead of hallucinating a pass.
+> **What reading the full source tree missed:** Static code review excelled at internal state-wiring bugs, while **UserSpec's blind browser lab caught 11 live rendered and interaction defects (79% of its findings)** — including horizontal text clipping inside an expanded settings panel, a sticky shortcut popover occluding the entire `390×844` mobile composer, double-sidebar layout collisions on settings views, an unlabeled `27×15px` mobile status icon, orphaned 2-character line wraps, and empty-stub preview CTAs — while honestly marking preview-restricted CRUD persistence as `N/A` instead of hallucinating a pass.
 
 ---
 
