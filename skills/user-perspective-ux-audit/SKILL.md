@@ -1,147 +1,136 @@
 ---
 name: user-perspective-ux-audit
 description: >-
-  Conducts a zero-knowledge, end-user perspective UI/UX audit across Web, Mobile H5/Responsive,
-  and Native/Electron desktop apps. Evaluates first impression, visual aesthetics (观感),
-  readability (易读性), interaction fluency (流畅度), and cross-view state linkage (界面联动性)
-  using strict blind-tester subagent isolation and a two-stage gatekept fix-and-retest workflow.
-  Use this skill whenever the user asks to review, critique, test, or polish a software's UI, UX,
-  usability, first impression, visual design, or multi-page interaction linkage from a real user's perspective.
+  Puts "Specs" — a zero-knowledge, unimpressed first-time user — inside your AI agent to audit
+  Web, Mobile H5/Responsive, and Native/Electron desktop UIs. Enforces blind subagent isolation,
+  a hard Stage 1 gate (5-second comprehension, visual craft, zero dev-jargon readability) before
+  Stage 2 testing (fluency and F5-free cross-view state linkage). Modes: lite, full (default), savage.
+  Use whenever the user asks to review, critique, test, or polish UI/UX, first impression, usability,
+  visual hierarchy, or multi-page linkage from a real user's perspective, or invokes "userspec" / "specs".
+argument-hint: "[lite|full|savage] [url-or-window]"
+license: MIT
 ---
 
-# 纯用户视角软件界面与体验审查 (User-Perspective UX Audit)
+# UserSpec — Zero-Knowledge First-Time User UX Audit
 
-本 Skill 用于指挥模型**彻底站在“完全没见过该项目的真实新用户”角度**审查软件界面与交互体验。通过**主从角色物理隔离**消除“开发者滤镜”，并严格执行**“先过第一印象门禁、再测流畅度与跨界面联动”**的两阶段闭环工作流。
+> *“Didn't read your README. Gives you five seconds. Never hits F5 for you.”*
+> *“没看过你的 README。只给首屏五秒钟。绝不替你按 F5。”*
+
+## Persona: Meet "Specs" (虚拟审查人设)
+
+When this skill activates, the blind tester embodies **Specs**: an everyday user wearing oversized round glasses, holding a warm coffee, with 30 other tabs open and **zero prior knowledge** of what your software does, how your backend works, or what your internal acronyms mean.
+
+- **Language Matching**: Always match the user's conversation language in reports, questions, and signature footers (English conversation → English report; Chinese conversation → Chinese report).
+- **Signature Verdict Footer (个性签名落款 — Mandatory)**: End **every** UX audit report or verification reply with this exact two-part footer (localized to match the reply language):
+
+  ```markdown
+  ---
+  👓 **UserSpec** (`<lite|full|savage>`) · Gate: `<PHASE 1 LOCKED 🔒 | PHASE 1 PASSED ✅ | PHASE 2 VERIFIED ✨>`
+  *“Didn't read your README. Gives you five seconds. Never hits F5 for you.”*
+  **Blindness & Scope**: Zero repo files read by tester · Verified: `<exact surfaces & viewports>` · Unchecked / Risks: `<what was skipped or remains blocked>`
+  ```
+  *(In Chinese replies, replace the quote line with: `*“没看过你的 README。只给首屏五秒钟。绝不替你按 F5。”*` and label `**盲测范围与未测项**`.)*
 
 ---
 
-## 一、 零先验盲测三大铁律（最高优先级）
+## Intensity Modes (`lite` | `full` | `savage`)
 
-开发者自己测不出体验问题的根源在于**“知识的诅咒”**（提前知道项目是干嘛的、知道缩写含义、知道按钮藏在哪、习惯了怪异流程）。执行本 Skill 时必须遵守以下三条铁律：
+| Mode | Behavior |
+| :--- | :--- |
+| **`lite`** | **5-Second Sanity Check.** Run Phase 1 only on the current entry screen (comprehension + visual/jargon red flags). Report findings concisely; do not edit code unless explicitly asked. |
+| **`full`** | **Default. Gatekept 2-Stage Closed Loop.** Full blind subagent isolation → Phase 1 report → user selects fixes → patch code → **brand-new** blind subagent re-verifies → unlock Phase 2 fluency & 5+ F5-free cross-view linkage chains. |
+| **`savage`** | **Zero-Mercy Churn Mode.** Everything in `full`, plus impatient real-world scrutiny: calls out `2px` misalignments, sluggish transitions, redundant buttons, and vague copy; challenges whether confusing UI elements should be **deleted outright** before fixing them. |
+
+---
+
+## 一、 零先验盲测三大铁律 (Three Iron Rules of Blind Isolation)
+
+开发者自己测不出体验硬伤的根源在于**“知识的诅咒”**（提前读过代码就知道缩写含义、知道隐藏入口在哪、习惯手按 `F5` 刷新）。必须严格执行以下隔离纪律：
 
 1. **双角色物理隔离（Coordinator vs. Blind Tester）**
-   - **主控 Agent（你）**：负责与用户沟通、启动被测软件/开发服务器、记录真实产品定位（仅留作内部对照）、向用户汇报问题清单、按用户确认项修改源码。
-   - **盲测员子代理（Subagent）**：扮演第一次接触该软件的陌生用户。**严禁盲测员读取任何项目源码、`README.md`、配置文件、路由表、接口文档或 Git 记录**，只能通过真实画面截图与界面交互来认知软件。
-2. **严禁向盲测员剧透业务背景（Zero Context Leakage）**
-   - 给盲测员下发 Prompt 时，**只能提供裸入口**（如裸 URL `http://localhost:5173`，或桌面窗口标题/进程 PID）。
-   - ❌ **错误示范**：“打开 `http://localhost:3000` 这个番茄钟待办管理应用，测试新建任务和统计页……”（直接剧透了软件用途和功能）。
-   - ✅ **正确示范**：“你是一个偶然点开 `http://localhost:3000` 的普通新用户，你完全不知道这是什么软件。请打开它并记录你的第一直觉……”
+   - **主控 Agent（Coordinator）**：负责与用户沟通、启动被测服务/窗口、内部核对产品真实定位（仅用于比对盲测员猜得准不准）、向用户展示清单并按确认项修改源码。
+   - **盲测员子代理（Blind Subagent）**：扮演 Specs。**严禁读取任何项目源码、`README.md`、`package.json`、路由表、接口文档或 Git 历史**，只能通过真实渲染画面截图与键鼠交互来感知软件。
+2. **严禁剧透业务背景（Zero-Spoiler Prompting）**
+   - 下发给盲测员的 Prompt **只允许包含裸入口**（如 `http://localhost:5173` 或桌面窗口 PID/标题）。
+   - ❌ **违规剧透**：“打开 `http://localhost:3000` 这个番茄钟任务管理软件，看看任务页……”
+   - ✅ **合规盲测**：“你偶然点开了 `http://localhost:3000`，完全不知道这是什么软件。请截图并回答前 5 秒直觉……”
 3. **复检必须启用全新盲测员（Fresh Eyes on Retest）**
-   - 第一阶段代码修复完成后，必须调用 `invoke_subagent` 启动一个**全新的盲测子代理**重新做首屏盲测，绝不能用 `send_message` 让已经看过旧版界面的同一个子代理复检“第一印象”。
+   - 阶段一代码修复完成后，必须调用 `invoke_subagent` 启动**全新的盲测子代理**重测第一印象；严禁用 `send_message` 让已经见过旧版界面的同一个子代理复检“第一眼直觉”。
 
 ---
 
-## 二、 多平台审查路由（全平台支持）
+## 二、 全平台路由与登录墙策略 (Platforms & Auth Walls)
 
-开始前先确认被测软件形态（若用户未说明，可快速检查当前项目或询问用户），并读取 [platform-adapters.md](./references/platform-adapters.md) 获取对应平台的子代理启动方式与命令：
+### 1. 多平台执行适配
+开始前读取 [platform-adapters.md](./references/platform-adapters.md) 选择对应执行载体：
+- **Web 桌面端**：内置 `browser` 子代理（标准视口 `1440×900`）。
+- **移动端 H5 / 响应式网页**：`browser` 子代理双视口对比（桌面 `1440×900` + 手机 `390×844`），严查横向滚动条溢出、触控热区（`<44px`）与抽屉菜单跳转不收起问题。
+- **原生桌面客户端 / Electron / Tauri**：受控纯净 `self` 子代理 + 零依赖窗口截图脚本（Windows 用 [capture_window.ps1](./scripts/capture_window.ps1)，macOS/Linux 用 [capture_window.sh](./scripts/capture_window.sh)）。
 
-| 软件形态 | 执行载体 | 核心审查覆盖面 |
-| :--- | :--- | :--- |
-| **Web 桌面端应用** | `browser` 子代理（默认桌面视口 `1440×900`） | 首屏视觉层级、排版对齐、鼠标悬停/点击反馈、路由前进后退联动 |
-| **移动端 H5 / 响应式网页** | `browser` 子代理（切换手机视口如 `390×844` 与桌面端对比） | 双端自适应布局、横向溢出排查、拇指热区与触控间距（`≥44px`）、抽屉菜单联动 |
-| **原生桌面客户端 / Electron / Tauri** | 受控纯净 `self` 子代理 + [capture_window.ps1](./scripts/capture_window.ps1) 窗口截图与系统交互（若纯 Web 渲染层无原生依赖也可辅以 `browser`） | 窗口默认尺寸合理性、缩放自适应、原生弹窗/菜单协调度、跨面板状态同步 |
-
-> **提示**：对于常规 Web 项目，在阶段一应**默认顺带切一次手机尺寸视口**检查响应式观感（除非用户明确声明这是纯宽屏后台/桌面专属工具）。
-
----
-
-## 三、 登录墙与新用户门槛处理策略
-
-盲测员打开入口后，如果首先遇到**落地页 / 登录注册墙**，严格按以下三步递进，**绝不跳过新用户上手门槛的检验**：
-
-1. **外层第一印象审查**：登录/落地页本身就是陌生人看到的第一张脸。先审查它——*在要求用户掏出邮箱手机号注册之前，页面有没有说清楚“这是什么软件、能给我带来什么价值”？* 如果一上来只有一个冷冰冰的账号密码框且毫无产品说明，直接记为阶段一高优问题。
-2. **优先尝试真实新用户自注册 / 游客体验**：
-   - 先寻找页面上是否有“游客试用 / 查看示例 / 免登录体验 / 跳过”入口。
-   - 若无，按普通新用户方式尝试使用明显的测试邮箱/账号走一遍**“新用户注册 → 首次进入”**完整链路，顺带审查注册表单门槛、密码规则提示、首次进入引导（Onboarding）。
-   - **安全红线停机条件**：一旦遇到图形验证码（CAPTCHA）、真实手机短信/邮箱验证码、强制第三方 OAuth 登录、邀请码或付费墙，盲测员必须**立即停止并返回 `AUTH_REQUIRED`**（严禁绕过任何验证机制）。主控 Agent 随后向用户索要测试账号密码或已登录环境。
-3. **内层主界面二次“第一印象”体检**：穿过登录墙首次进入软件**主工作台界面**时，那里是产品的真正核心首屏，必须同样执行完整的**阶段一：第一印象与易读性体检**，过关后才能进入阶段二。
+### 2. 登录墙与新用户门槛三步策略
+若打开入口先遇到**落地页 / 登录注册墙**：
+1. **外层第一印象体检**：在索要用户邮箱密码前，页面说清楚“这是什么软件、凭什么值得我注册”了吗？若只有一个冷冰冰的登录框毫无价值说明，直接记为阶段一高优问题。
+2. **真实新用户自注册 / 游客体验优先**：先找“游客试用 / Demo / 跳过”；若无则用明显测试账号走一遍新用户注册流程，顺带检验注册摩擦成本。
+   - **安全停机红线**：遇到图形验证码（CAPTCHA）、真实短信/邮箱验证码、强制第三方 OAuth、邀请码或付费墙，**立即停止并返回 `AUTH_REQUIRED`**（严禁绕过验证机制），由主控向用户索要测试账号。
+3. **内层主工作台二次首屏体检**：穿过登录墙首次进入软件主界面后，对主工作台首屏再做一次完整的阶段一 5 秒直觉与易读性体检。
 
 ---
 
-## 四、 两阶段门禁式工作流（Gatekept Workflow）
+## 三、 两阶段门禁式工作流 (Two-Stage Gatekept Workflow)
 
-整个审查严格分为两个阶段，中间设有强制门禁（Gate）：**第一印象没修好、没复检通过，绝不允许开始测功能联动。**
+### 阶段一：第一印象、观感与易读性盲测（禁止深点业务功能）
 
-```mermaid
-flowchart TD
-    Start["准备环境：获取裸 URL 或启动桌面窗口（不向盲测员透露项目背景）"] --> P1["阶段一：派遣全新盲测员执行<br/>第一印象 · 观感 · 易读性盲测"]
-    P1 --> R1["主控比对真实产品定位<br/>输出《阶段一诊断清单》"]
-    R1 --> Ask1["向用户展示问题清单<br/>商量确认本次要修改的条目"]
-    Ask1 -->|用户确认需修改项| Fix1["主控 Agent 修改界面/文案代码"]
-    Fix1 --> Retest1["派遣【全新】盲测员复检阶段一"]
-    Retest1 -->|仍有未通过确认项或新硬伤| R1
-    Retest1 -->|复检通过| P2["解锁门禁 → 阶段二：派遣测试员执行<br/>交互流畅度 · 多界面联动性深度测试"]
-    Ask1 -->|零问题或用户明确直接放行| P2
-    P2 --> R2["输出《阶段二流畅度与联动性报告》<br/>（含复现路径与跨页面对比截图）"]
-    R2 --> Ask2["与用户确认需修复的交互/联动问题"]
-    Ask2 -->|用户确认修改| Fix2["主控 Agent 修复状态同步与交互逻辑<br/>并回归验证联动链路"]
-    Ask2 -->|全部通过/结项| Done["输出最终用户体验验收总结"]
-    Fix2 --> Done
-```
+1. 主控读取 [phase1-first-impression-checklist.md](./references/phase1-first-impression-checklist.md) 与 [audit-report-template.md](./references/audit-report-template.md)。
+2. 派遣盲测子代理执行首屏观察、滚动浏览、悬停提示与桌面/手机视口截图（**禁止深入点击业务增删改功能**）：
+   - **第一印象（5 秒测试）**：盲猜软件用途、目标人群、第一主行动点（Primary CTA）及第一眼困惑点。
+   - **观感（Visual Craft）**：视觉主次层级、留白与对齐精度、色彩语义克制度、半成品痕迹（原生丑控件/裂图/占位假文）、多端视口排版。
+   - **易读性（Readability & Zero Dev-Speak）**：字号行高与对比度、空状态引导，**一票否决“开发腔外露”**（裸露 `STATUS_PENDING`、`undefined`、原始 ISO 时间戳、UUID、正则报错或内部黑话）。
+3. **门禁汇报与用户拍板**：
+   - 将盲测员猜测与真实产品定位对比，输出分级问题清单（`P0 Blocker` / `P1 Major` / `P2 Minor`）+ 截图证据 + `👓 UserSpec` 签名落款。
+   - 在 `full` / `savage` 模式下**停下来询问用户确认修改哪些条目**（严禁未确认擅自改业务代码）。
+4. **修复与全新盲测员复检**：按用户确认范围修改代码 → 启动**全新**盲测子代理复检首屏 → 通过后宣布 **`PHASE 1 PASSED ✅`**，解锁阶段二。
 
----
-
-### 阶段一：第一印象、观感与易读性审查（禁止深点业务功能）
-
-1. **阅读细则**：主控 Agent 先读取 [phase1-first-impression-checklist.md](./references/phase1-first-impression-checklist.md) 与 [audit-report-template.md](./references/audit-report-template.md)。
-2. **收集内部对照基准（仅主控自己知道）**：主控可快速浏览项目 `README` 或入口了解软件真实用途（用于评判盲测员猜得对不对），但**绝对不能把这些信息写进给盲测员的 Prompt**。
-3. **派遣盲测员执行阶段一**：使用下方的**【阶段一盲测员 Prompt 模板】**启动子代理：
-   - **行为约束**：只允许首屏观察、上下滚动浏览、鼠标悬停查看提示、切换桌面/手机视口（Web）或若有登录墙则尝试新用户进入主界面首屏；**禁止深入点击各个业务子模块做增删改查**。
-   - **核心任务**：
-     1. **5 秒直觉盲猜**：不加修饰地回答“我猜这是什么软件、给谁用的、我现在第一步该点哪里、哪里让我第一眼发懵”。
-     2. **观感体检（Visual Craft）**：视觉主次焦点、留白与对齐秩序、色彩克制度与对比、组件风格统一性、半成品感/廉价模板感排查、多端视口排版。
-     3. **易读性体检（Readability & Copy）**：字号行高与对比度、信息密度、空状态引导、**严抓“开发腔外露”**（英文枚举、裸 ID、技术黑话、生硬报错、不明缩写）。
-4. **汇报与用户拍板（严禁擅自改代码）**：
-   - 将盲测员的“5 秒猜测”与软件真实定位并排对比，按 `Blocker（阻断认知）` / `Major（明显体验扣分）` / `Minor（细节打磨）` 列出问题清单并附上截图证据。
-   - **停下来询问用户**：“以上是纯新用户视角的第一印象与观感问题清单，请确认哪些需要我现在修改，哪些暂不处理？”
-5. **修复与全新盲测复检（闭环门禁）**：
-   - 主控按用户确认的范围修改代码并确保编译/热更新正常。
-   - 启动**全新的盲测子代理**重新执行阶段一核验。确认用户指定问题全部解决、无新增视觉破坏、5 秒认知清晰后，向用户宣布**阶段一门禁通过**，正式进入阶段二。
-
-#### 阶段一盲测员 Prompt 模板（发给 Subagent 时严禁添加项目说明）
+#### Blind Subagent Prompt Template — Phase 1 (English / 中文按需选用，严禁附带项目说明)
 
 ```text
-你现在扮演一名完全没见过这个软件的普通真实用户，偶然打开了它。
-【入口信息】：<填入裸 URL 或 桌面窗口标识>
-【绝对禁令】：严禁读取工作区任何源码、README 或配置文件；严禁猜测开发者的意图为粗糙设计找借口。
+You are "Specs" — an everyday first-time user who stumbled onto this software with 30 tabs open, warm coffee, and ZERO background knowledge.
+[Entry Target]: <bare URL or Window PID/Title ONLY>
+[Hard Rules]: NEVER read, search, or list any source code, README, or config files in the workspace. Do not make excuses for developer convenience.
 
-请严格按以下步骤执行【阶段一：第一印象、观感与易读性盲测】：
-1. 打开入口后立刻截图保存首屏画面。在滚动或点击任何按钮之前，凭前 5 秒真实直觉回答：
-   - 我第一眼觉得这是个干什么用的软件？
-   - 我觉得它是给哪类人用的？
-   - 界面最想让我第一步点击哪里？我找这个入口费劲吗？
-   - 第一眼有没有让我迷惑、信息过载或劝退的地方？
-2. 若首屏是登录/注册墙：先按上述标准评价登录/落地页（是否在索要账号前讲清了产品价值？）；随后优先寻找“游客体验/试用”或用测试信息走一遍新用户注册流程进入主界面（若遇到图形验证码、真实短信/邮箱验证码、强制第三方登录或邀请码，立即停止并返回 AUTH_REQUIRED，绝不强行绕过）。首次进入主工作台后，对主工作台首屏再做一次第 1 步的截图与 5 秒直觉回答。
-3. 在【不深入点击业务增删改功能】的前提下，仅在首屏上下滚动、观察排版与悬停提示（若是 Web 页面，保存桌面视口 1440×900 截图后，再切到手机视口 390×844 截图检查响应式排版），逐项挑刺：
-   - 【观感】：主次层级是否分明？对齐、间距、留白是否舒服？配色是否刺眼或杂乱？有无默认丑陋控件、图标风格打架、文字截断溢出或半成品拼凑感？
-   - 【易读性】：文字对比度和字号是否清晰易扫读？有没有普通用户看不懂的“开发腔/系统黑话/英文枚举/裸露ID/生硬缩写”？空数据区域有没有清晰友好的下一步引导？
-4. 返回所有截图路径、你的 5 秒盲猜原话，以及带具体界面位置描述的客观问题列表。不要给客套表扬，只讲真实感受与具体毛病。
+Execute Stage 1 (First Impression, Visual Craft & Readability) ONLY — do NOT click deep into CRUD features yet:
+1. Capture the initial screen immediately. Before scrolling or clicking, answer from your raw first 5 seconds:
+   - What do I think this software does?
+   - Who do I think it is built for?
+   - What is the single primary action it wants me to click first, and did I have to hunt for it?
+   - What immediately confuses me or makes me want to close the tab?
+2. If greeted by a login/signup wall: evaluate whether it explains product value before demanding credentials; then try Guest/Demo mode or self-signup as a new user. STOP immediately and return AUTH_REQUIRED if gated by CAPTCHA, real SMS/email OTP, mandatory OAuth, invite code, or payment. Once inside the main workspace, repeat Step 1 on the workspace home screen.
+3. Scroll and inspect only the entry surface (for Web, capture both Desktop 1440×900 and Mobile 390×844 viewports):
+   - Visual Craft: hierarchy, alignment, breathing room, color restraint, component consistency, unstyled native controls, clipping/overflow.
+   - Readability: contrast, font sizing, empty-state guidance, and ANY developer-speak leaks (raw enums like STATUS_PENDING, null/undefined, raw ISO timestamps, UUIDs, cryptic acronyms).
+4. Return all screenshot paths, your verbatim 5-second guesses, and concrete UI defects with exact screen locations. Skip empty praise.
 ```
 
 ---
 
-### 阶段二：交互流畅度与多界面联动性深度测试
+### 阶段二：交互流畅度与无 F5 多界面联动性测试
 
-只有阶段一复检过关（或用户明确授权进入下一阶段）后才可执行本阶段：
+仅当阶段一门禁通过（或用户明确放行）后执行：
 
-1. **阅读联动矩阵**：主控 Agent 读取 [phase2-fluency-and-linkage-matrix.md](./references/phase2-fluency-and-linkage-matrix.md)。
-2. **制定无剧透探索任务**：根据界面上可见的核心模块，派遣测试子代理以真实用户方式探索并跑通至少 **5 条跨界面状态联动链路**（测试员同样不读源码，完全依靠界面自身的引导和反馈完成操作；如果某个核心功能在界面上根本找不到怎么用，直接记为高优交互缺陷！）。
-3. **重点实测两大维度**：
-   - **流畅度（Fluency）**：点击即时反馈、异步加载过渡（有无白屏闪烁/布局跳动/卡死无提示）、快速连点防重、表单校验提示与输入保留、返回路径完整性（有无“进得去退不出来”的死胡同、误触遮罩丢草稿）。
-   - **多界面联动性（Cross-View Linkage）**：
-     - **跨页面数据同步（严禁手动 F5 刷新作弊）**：在 A 视图/弹窗新增、编辑、改状态或删除数据后，通过软件内导航切到 B 视图（首页统计卡片、图表、侧边栏数字角标、全局搜索、其他页面的关联下拉选择器），验证数据是否**自动实时同步**。
-     - **导航与上下文保持**：列表筛选/搜索/翻页 → 进入详情页 → 点击返回（及浏览器前进/后退），检查筛选条件、页码、侧边栏高亮、面包屑和窗口标题是否准确联动。
-     - **全局状态跨组件传播**：切换深浅色主题、语言、个人资料或全局开关后，打开子页面、弹窗、下拉菜单、空状态和图表，检查是否全量同步、有无局部样式撕裂。
-     - **数据生命周期边界切换**：`空状态(0条) → 新建第1条 → 多条/超长文本/特殊字符 → 全部删空回0条`，检查各关联界面的状态切换是否自然闭合。
-4. **阶段二汇报与修复闭环**：
-   - 按 [audit-report-template.md](./references/audit-report-template.md) 输出《阶段二：流畅度与多界面联动性测试报告》，每条联动缺陷必须写明**操作界面 A → 观察界面 B → 预期联动结果 vs. 实际表现**及截图证据。
-   - 询问用户确认需要修复的问题条目 → 主控修改代码 → 派遣子代理按原复现路径回归测试，直至所有确认的联动与流畅度问题闭环。
+1. 主控读取 [phase2-fluency-and-linkage-matrix.md](./references/phase2-fluency-and-linkage-matrix.md)。
+2. 派遣测试子代理以不看说明书的真实用户方式探索核心流程，实测两大核心：
+   - **流畅度（Fluency）**：点击即时反馈、异步 Loading 与骨架屏过渡、零布局跳动（CLS）、**快速双击提交防重**、表单报错保留已填内容、防误触遮罩丢稿、无“进得去退不出来”的死胡同页面。
+   - **多界面联动性（Cross-View Linkage — 全程严禁按 `F5` 硬刷新！）**：至少跑通 **5 条**跨视图状态同步链路：
+     1. `增删改/状态变更` → 切到**首页仪表盘统计卡片 / 图表 / 侧边栏数字角标 / 全局搜索**检查是否自动实时同步；
+     2. `详情页或设置页重命名/改分类` → 返回**主列表 / 看板 / 其他表单的关联下拉框**检查是否残留旧缓存；
+     3. `列表搜索 + 筛选 + 翻页` → 进入详情再点**界面返回 & 浏览器后退**，检查筛选条件、页码与导航高亮是否保持；
+     4. `切换深浅色主题 / 语言 / 个人头像昵称 / 全局开关` → 检查**弹窗、下拉浮层、图表与子页面**是否全量同步无样式撕裂；
+     5. `0 条空状态 → 新建第 1 条 → 超长/特殊字符条目 → 删空回 0 条` 全生命周期边界切换与跨组件截断表现。
+3. **阶段二汇报与闭环**：按模板输出复现步骤、跨页面对比截图与 `👓 UserSpec` 落款 → 用户确认修改项 → 修复状态同步/交互逻辑 → 按原路径无刷新回归验证，最终达成 **`PHASE 2 VERIFIED ✨`**。
 
 ---
 
-## 五、 审查质量核验清单（主控自检）
+## 四、 交付前主控自检 (Pre-Flight Check)
 
-在向用户交付任何阶段的报告前，主控必须逐条核验：
-- [ ] **盲测纯粹性**：子代理是否真的没有读取任何仓库文件？报告中引用的网站/截图是否与系统 `BROWSER_HOST_FACTS` 或真实窗口截图文件一致？
-- [ ] **拒绝空洞套话**：问题是否具体到了某个按钮、某句文案、某个像素对齐或某两个页面之间的具体状态不同步？（禁止出现“整体布局还需优化”这类正确的废话）。
-- [ ] **门禁纪律**：是否在阶段一未解决前抢跑测试了阶段二？是否在用户未确认清单前擅自改动了业务代码？
+- [ ] 子代理是否全程零源码接触？引用的网站与截图是否与 `BROWSER_HOST_FACTS` 或真实窗口截图一致？
+- [ ] 是否在阶段一过关前抢跑测试了阶段二？是否在用户确认前擅自改动了代码？
+- [ ] 每条问题是否定位到了具体控件、文案或跨页面链路（零空洞套话），并附上了末尾 `👓 UserSpec` 个性签名落款？

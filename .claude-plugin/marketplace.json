@@ -1,0 +1,13 @@
+{
+  "name": "userspec",
+  "owner": {
+    "name": "marksimZ"
+  },
+  "plugins": [
+    {
+      "name": "userspec",
+      "source": "./",
+      "description": "Zero-knowledge first-time user UI/UX audit skill with 2-stage gate and cross-view linkage testing."
+    }
+  ]
+}

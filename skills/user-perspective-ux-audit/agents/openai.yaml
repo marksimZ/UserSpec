@@ -1,0 +1,3 @@
+interface:
+  display_name: "UserSpec — Blind First-Time User UX Audit"
+  short_description: "Audit Web, Mobile H5, and Desktop UIs through a zero-knowledge first-time user persona with a 2-stage gate and cross-view linkage tests."

@@ -65,9 +65,14 @@
            powershell -NoProfile -ExecutionPolicy Bypass -File "<Skill目录>/scripts/capture_window.ps1" -ProcessId <PID> -OutFile "<ArtifactDir>/ux_screenshots/step_01.png"
         b) 通过 UI 自动化（如 Windows UIAutomation / SendKeys / 坐标点击脚本，或应用支持的 Playwright Electron 驱动）模拟真实用户的鼠标点击、键盘输入、窗口拉伸与快捷键操作，每步操作后再次截图观察界面变化。
      ```
-3. **跨操作系统桌面截图备选（若运行在非 Windows 环境）**：
-   - **macOS**：使用系统自带 `screencapture -l <WindowID> <out.png>` 或全屏 `screencapture -x <out.png>`。
-   - **Linux**：使用 `import -window "<WindowTitle>" <out.png>`（ImageMagick）、` xdotool` + `maim` 或 Wayland 下的 `grim`。
+3. **跨操作系统桌面截图脚本（macOS / Linux）**：
+   - 直接调用本 Skill 自带的跨平台脚本 `[capture_window.sh](../scripts/capture_window.sh)`：
+     ```bash
+     # 枚举当前可见窗口
+     bash "<Skill目录>/scripts/capture_window.sh" --list
+     # 捕获指定标题窗口截图（自动适配 macOS screencapture / Linux maim, import, grim）
+     bash "<Skill目录>/scripts/capture_window.sh" --title "<WindowTitle>" --out "<ArtifactDir>/ux_screenshots/step_01.png"
+     ```
 
 ### 路径 B：Electron / Tauri 混合应用的渲染层辅助审查
 
