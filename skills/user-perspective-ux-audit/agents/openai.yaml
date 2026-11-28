@@ -1,3 +1,3 @@
 interface:
   display_name: "UserSpec — Zero-Context Usability Lab"
-  short_description: "Blind first-time user UX audit with a hard Stage 1 comprehension gate and F5-free cross-view state linkage tests (glance / gate / stress)."
+  short_description: "Three-stage blind UX audit: 5s first impression gate, unguided full-feature & workflow completion, and F5-free cross-view linkage (glance / gate / stress)."

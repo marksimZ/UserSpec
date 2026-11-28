@@ -7,7 +7,7 @@
     {
       "name": "userspec",
       "source": "./",
-      "description": "Zero-context usability lab skill: 5-second first-impression gate and F5-free cross-view state linkage testing."
+      "description": "Three-stage zero-context usability lab skill: 5-second first-impression gate, unguided full-feature discovery & workflow completion, and F5-free cross-view state linkage testing."
     }
   ]
 }

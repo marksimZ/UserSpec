@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Zero-Context Usability Lab for AI Coding Agents</strong><br>
-  <sub>First impression first. Cross-view state linkage second. Zero source-code spoilers.</sub>
+  <sub>First impression first. Unguided full-workflow completion second. Cross-view state linkage third.</sub>
 </p>
 
 <p align="center">
@@ -32,14 +32,15 @@
 
 When an AI coding agent inspects a product's UX in the same session where it reads `README.md`, `package.json`, and `src/routes.tsx`, **context contamination** invalidates the test immediately. An agent that already knows the codebase understands internal acronyms, knows where secondary controls are hidden, and unconsciously forgives stale UI state.
 
-**UserSpec** turns your coding agent into a structured usability lab: it isolates a zero-context test subject in a separate subagent, enforces a hard Stage 1 comprehension gate before allowing deep feature testing, and verifies cross-view state synchronization without manual page refreshes (`F5`).
+**UserSpec** turns your coding agent into a structured usability lab: it isolates a zero-context test subject in a separate subagent, enforces a hard Stage 1 comprehension gate, measures unguided full-feature discovery and end-to-end workflow completion in Stage 2, and verifies cross-view state synchronization in Stage 3 without manual page refreshes (`F5`).
 
 | Dimension | Standard Code-Aware AI Review | UserSpec Blind Usability Lab |
 | :--- | :--- | :--- |
 | **Starting Context** | Reads `README`, routes, and component code first. | Receives **only a bare URL or desktop window PID**; zero repo access. |
 | **First Impression** | Praises architecture it already understands. | Must answer 4 raw 5-second comprehension questions before scrolling or clicking. |
 | **Copy & Jargon** | Accepts `TASK_PENDING`, raw ISO timestamps, and UUIDs as "working bindings." | Flags any exposed enum, internal jargon, or developer-centric error message. |
-| **Test Sequencing** | Jumps straight into happy-path CRUD clicks. | **Locks Stage 2** until Stage 1 fixes are approved, patched, and verified by a **fresh** blind subagent. |
+| **Feature & Workflow Coverage** | Clicks 2–3 obvious buttons/tabs and stops. | Coordinator secretly inventories all features/workflows; blind agent runs **Pass 1 zero-hint walkthrough + Pass 2 goal-only nudge** on missed Ghost Features. |
+| **Test Sequencing** | Jumps straight into happy-path CRUD clicks. | **Enforces hard gates** between Stage 1 (first impression), Stage 2 (full-workflow completion), and Stage 3 (linkage), with a **fresh** blind retest after fixes. |
 | **State Linkage** | Refreshes the page or checks the API response directly. | Bans manual `F5` reloads; verifies live sync across dashboards, badges, selectors, and Back navigation. |
 
 ---
@@ -79,11 +80,17 @@ Deep CRUD clicks are prohibited during Stage 1. The subject captures Desktop (`1
 - **Readability & Human Copy**: Contrast, typography scale, empty-state guidance, and strict detection of exposed developer artifacts (`null`, `undefined`, raw enums, unformatted timestamps, cryptic acronyms).
 - **Login & Onboarding Walls**: Evaluates whether value is communicated *before* requesting credentials, tests guest mode or self-signup as a real newcomer, and halts cleanly (`AUTH_REQUIRED`) on CAPTCHAs, real SMS/email OTPs, mandatory OAuth, or paywalls to request a test account.
 
-### 3. Hard Stage 1 Gate (Confirm → Patch → Fresh-Subject Retest)
+### 3. Hard Gate 1 (Confirm → Patch → Fresh-Subject Retest)
 The coordinator outputs a prioritized Stage 1 table (`P0 Blocker` / `P1 Major` / `P2 Minor`) with screenshot evidence and pauses for your selection. After patching approved items, UserSpec spawns a **brand-new blind subagent** (never reusing the previous session's memory) to confirm Stage 1 passes before unlocking Stage 2.
 
-### 4. Stage 2 — Interaction Fluency & `F5`-Free Cross-View Linkage
-Once Stage 1 clears, the tester navigates organically without documentation and audits:
+### 4. Stage 2 — Unguided Full-Feature Discovery & End-to-End Workflow Completion
+Instead of superficial "window shopping" clicks, Stage 2 measures whether a real stranger can discover **every** capability and drive **every** core workflow to its final output without hints:
+- **Secret Ground-Truth Ledger**: Before testing begins, the coordinator silently inventories every user-facing feature (`F-01..F-N`, including right-click menus, text-selection popovers, drag-drop, shortcuts, and settings) and end-to-end workflows (`W-01..W-M` with strict Definitions of Done)—keeping this ledger completely hidden from the tester.
+- **Pass 1 (100% Zero-Hint Walkthrough)**: The blind subject deduces user goals from the UI alone, constructs realistic inputs, sweeps visible affordances, and runs workflows all the way to saved output, returning a **Blind Mental Map**.
+- **Reconciliation & Pass 2 (Goal-Only Nudge)**: The coordinator computes **Feature Discovery Rate (`X/N`)** and **Workflow Completion Rate (`Y/M`)**, classifying items into 🟢 Autonomous Pass, 🟡 Completed with Detours, 🟠 Blocked Mid-Flow, or 🔴 **Ghost Feature (`0%` discovered)**. For each Ghost Feature, Pass 2 gives **only the plain-language user goal** (zero UI/button hints) to separate **`P1` buried entry cues** from **`P0` broken workflows**, followed by Hard Gate 2 before Stage 3.
+
+### 5. Stage 3 — Interaction Fluency & `F5`-Free Cross-View Linkage
+Once Stage 1 and Stage 2 clear, the tester audits interaction polish and state sync across the full app:
 - **Interaction Fluency**: Click affordance, async loading states and layout stability (CLS), rapid double-click duplicate-submission tests, form input preservation on validation errors, accidental backdrop-dismiss protection, and dead-end screen checks.
 - **Cross-View State Linkage (Minimum 5 Chains, `F5` Forbidden)**:
   1. **CRUD → Global Summary**: Create, edit, or delete in View A → verify Dashboard cards, charts, sidebar count badges, and global search in View B update automatically.
@@ -109,8 +116,8 @@ Every audit reply concludes with a standardized **Usability Lab Receipt** docume
 
 ```markdown
 ---
-**UserSpec Lab Receipt** | Mode: `gate` | Gate: `STAGE 1 LOCKED`
-**Isolation**: Blind subagent (0 repo files read) · **Inspected**: `/login`, `/dashboard` (`1440×900`, `390×844`) · **Pending / Risks**: Stage 2 linkage locked until P1-01 & P1-02 pass fresh-subject retest.
+**UserSpec Lab Receipt** | Mode: `gate` | Gate: `STAGE 2 LOCKED`
+**Isolation**: Blind subagent (0 repo files read) · **Inspected**: `/login`, `/dashboard`, `/knowledge` (`1440×900`, `390×844`) · **Coverage**: `Discovery 9/12 · Workflows 3/4` · **Pending / Risks**: Stage 3 linkage locked until `P1` buried context menu & `P0` export dead-end pass fresh-subject retest.
 ```
 
 ---
@@ -180,10 +187,11 @@ UserSpec/
 │       ├── SKILL.md                                  # Core protocol, isolation rules, modes & prompts
 │       ├── agents/openai.yaml                        # Codex / OpenAI skill display metadata
 │       ├── references/
-│       │   ├── phase1-first-impression-checklist.md  # Stage 1 comprehension, visual & readability rubric
-│       │   ├── phase2-fluency-and-linkage-matrix.md  # Stage 2 fluency checks & 6 cross-view chains
-│       │   ├── platform-adapters.md                  # Web, Mobile H5 & Native/Electron guides
-│       │   └── audit-report-template.md              # Standardized Stage 1 & Stage 2 report templates
+│       │   ├── phase1-first-impression-checklist.md     # Stage 1 comprehension, visual & readability rubric
+│       │   ├── phase2-feature-and-workflow-discovery.md # Stage 2 secret ledger, Pass 1/2 & reconciliation
+│       │   ├── phase3-fluency-and-linkage-matrix.md     # Stage 3 fluency checks & 6 cross-view chains
+│       │   ├── platform-adapters.md                     # Web, Mobile H5 & Native/Electron guides
+│       │   └── audit-report-template.md                 # Standardized Stage 1, 2 & 3 report templates
 │       └── scripts/
 │           ├── capture_window.ps1                    # Windows DPI-aware Win32 DWM window capture
 │           └── capture_window.sh                     # macOS & Linux window capture helper
@@ -204,6 +212,9 @@ Context contamination is irreversible within a single thread. Once an agent read
 
 **Why require a fresh subagent after Stage 1 fixes?**
 The original Stage 1 subagent already learned what the app does during the first pass. Spawning a new subagent guarantees the retest measures real first-time clarity rather than retained conversation memory.
+
+**Why use two passes in Stage 2 (Zero-Hint vs. Goal-Only Nudge)?**
+If a blind user misses a feature in Pass 1, you still need to know *why*: did they just never notice the buried entry point, or is the workflow itself broken? Giving **only the plain-language user goal** (with zero button or route hints) in Pass 2 separates `P1` discoverability defects (succeeds once aimed) from `P0` workflow blockers (fails even when actively looking for it).
 
 **How does UserSpec handle authentication walls and CAPTCHAs?**
 It audits the login/landing screen first, then attempts guest access or standard self-registration to evaluate onboarding friction. If it encounters a CAPTCHA, real SMS/email OTP, mandatory third-party OAuth, or payment gate, it stops immediately (`AUTH_REQUIRED`) and asks you for test credentials—it never attempts to bypass security checks.

@@ -1,88 +1,105 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 290" width="920" height="290" role="img" aria-label="UserSpec Zero-Knowledge Two-Stage Gate Workflow (Dark)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" role="img" aria-label="UserSpec Zero-Spoiler Three-Stage Gatekept Protocol (Dark)">
   <defs>
     <style>
-      .bg { fill: #0d1117; }
-      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.75; rx: 12; }
-      .gate { fill: #241710; stroke: #f97316; stroke-width: 2; rx: 12; }
+      .outer { fill: #16181d; stroke: #2c313c; stroke-width: 1.5; rx: 16; }
+      .card { fill: #1d2027; stroke: #313744; stroke-width: 1.5; rx: 12; }
+      .gate { fill: #2b1a14; stroke: #eb7a53; stroke-width: 1.75; rx: 10; }
       .wall { stroke: #f87171; stroke-width: 2; stroke-dasharray: 6 5; }
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; fill: #f0f6fc; }
-      .gate-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 800; fill: #fb923c; letter-spacing: 0.04em; }
-      .wall-label { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; font-weight: 700; fill: #fca5a5; }
-      .body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 12px; fill: #9ca3af; }
-      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; fill: #d1d5db; }
-      .badge { fill: #f0f6fc; rx: 6; }
-      .badge-txt { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; font-weight: 700; fill: #0d1117; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 800; fill: #f9fafb; }
+      .gate-txt { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; font-weight: 800; fill: #f28b66; }
+      .wall-label { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; font-weight: 700; fill: #fca5a5; }
+      .body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; font-size: 11px; fill: #9ca3af; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; fill: #5cc4ae; font-weight: 700; }
+      .mono-warn { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; fill: #f28b66; font-weight: 700; }
+      .badge { fill: #f3f4f6; rx: 6; }
+      .badge-sage { fill: #5cc4ae; rx: 6; }
+      .badge-accent { fill: #eb7a53; rx: 6; }
+      .badge-txt { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; font-weight: 800; fill: #111827; }
       .arrow { stroke: #8b949e; stroke-width: 1.75; fill: none; }
-      .arrow-accent { stroke: #f97316; stroke-width: 2; fill: none; }
+      .arrow-accent { stroke: #eb7a53; stroke-width: 1.75; fill: none; }
     </style>
     <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#8b949e"/>
     </marker>
     <marker id="head-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f97316"/>
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#eb7a53"/>
     </marker>
   </defs>
 
-  <rect class="bg" width="920" height="290" rx="14"/>
+  <rect class="outer" x="1" y="1" width="958" height="298"/>
 
   <!-- Blind Isolation Wall -->
-  <line class="wall" x1="208" y1="22" x2="208" y2="268"/>
-  <rect x="136" y="14" width="144" height="22" rx="11" fill="#2d1215" stroke="#7f1d1d" stroke-width="1"/>
-  <text class="wall-label" x="208" y="29" text-anchor="middle">ZERO-SPOILER WALL</text>
+  <line class="wall" x1="202" y1="22" x2="202" y2="278"/>
+  <rect x="130" y="12" width="144" height="20" rx="10" fill="#2d1215" stroke="#7f1d1d" stroke-width="1"/>
+  <text class="wall-label" x="202" y="26" text-anchor="middle">ZERO-SPOILER WALL</text>
 
   <!-- Step 0: Coordinator -->
-  <rect class="card" x="22" y="54" width="164" height="182"/>
-  <rect class="badge" x="36" y="68" width="94" height="20"/>
-  <text class="badge-txt" x="83" y="82" text-anchor="middle">COORDINATOR</text>
-  <text class="title" x="36" y="112">Host Agent</text>
-  <text class="body" x="36" y="134">• Starts server / window</text>
-  <text class="body" x="36" y="154">• Hides README &amp; code</text>
-  <text class="body" x="36" y="174">• Passes bare URL/PID</text>
-  <text class="body" x="36" y="194">• Applies approved fixes</text>
-  <text class="mono" x="36" y="220">no hints allowed →</text>
+  <rect class="card" x="20" y="48" width="164" height="196"/>
+  <rect class="badge-sage" x="32" y="60" width="96" height="20"/>
+  <text class="badge-txt" x="80" y="74" text-anchor="middle">COORDINATOR</text>
+  <text class="title" x="32" y="100">Host Agent</text>
+  <text class="body" x="32" y="122">• Starts server / app</text>
+  <text class="body" x="32" y="141">• Builds secret Feature</text>
+  <text class="body" x="32" y="156">  &amp; Workflow Ledger</text>
+  <text class="body" x="32" y="176">• Passes bare URL/PID</text>
+  <text class="body" x="32" y="196">• Patches approved fixes</text>
+  <text class="mono" x="32" y="226">no spoilers cross →</text>
 
-  <!-- Arrow 0 -> 1 -->
-  <line class="arrow" x1="186" y1="145" x2="228" y2="145" marker-end="url(#head)"/>
+  <line class="arrow" x1="184" y1="146" x2="216" y2="146" marker-end="url(#head)"/>
 
-  <!-- Step 1: Phase 1 -->
-  <rect class="card" x="232" y="54" width="204" height="182"/>
-  <rect class="badge" x="246" y="68" width="76" height="20"/>
-  <text class="badge-txt" x="284" y="82" text-anchor="middle">PHASE 1</text>
-  <text class="title" x="246" y="112">5-Second Blind Audit</text>
-  <text class="body" x="246" y="134">• "What does this app do?"</text>
-  <text class="body" x="246" y="154">• Visual hierarchy &amp; craft</text>
-  <text class="body" x="246" y="174">• Zero dev-jargon / enums</text>
-  <text class="body" x="246" y="194">• Desktop + Mobile view</text>
-  <text class="mono" x="246" y="220">no deep clicking yet</text>
+  <!-- Stage 1 -->
+  <rect class="card" x="220" y="48" width="174" height="196"/>
+  <rect class="badge" x="232" y="60" width="72" height="20"/>
+  <text class="badge-txt" x="268" y="74" text-anchor="middle">STAGE 1</text>
+  <text class="title" x="232" y="100">5s First Impression</text>
+  <text class="body" x="232" y="122">• 5-sec comprehension</text>
+  <text class="body" x="232" y="142">• Visual craft &amp; layout</text>
+  <text class="body" x="232" y="162">• Zero dev-jargon / enums</text>
+  <text class="body" x="232" y="182">• 1440px + 390px views</text>
+  <text class="mono-warn" x="232" y="226">no deep CRUD yet</text>
 
-  <!-- Arrow 1 -> Gate -->
-  <line class="arrow-accent" x1="436" y1="145" x2="466" y2="145" marker-end="url(#head-accent)"/>
+  <!-- Gate 1 Pill -->
+  <line class="arrow-accent" x1="394" y1="146" x2="410" y2="146"/>
+  <rect class="gate" x="410" y="96" width="54" height="100"/>
+  <text class="gate-txt" x="437" y="132" text-anchor="middle">🔒</text>
+  <text class="gate-txt" x="437" y="150" text-anchor="middle">GATE</text>
+  <text class="gate-txt" x="437" y="166" text-anchor="middle">01</text>
+  <line class="arrow-accent" x1="464" y1="146" x2="478" y2="146" marker-end="url(#head-accent)"/>
 
-  <!-- Gate -->
-  <rect class="gate" x="470" y="54" width="184" height="182"/>
-  <text class="gate-title" x="562" y="82" text-anchor="middle">🔒 HARD GATE</text>
-  <text class="title" x="562" y="110" text-anchor="middle">Fix &amp; Fresh Retest</text>
-  <text class="body" x="486" y="136">1. User picks issues</text>
-  <text class="body" x="486" y="156">2. Host patches UI/copy</text>
-  <text class="body" x="486" y="176">3. Brand-new blind agent</text>
-  <text class="body" x="486" y="196">   re-verifies screen 1</text>
-  <text class="mono" x="562" y="222" text-anchor="middle" fill="#fb923c">pass unlocks phase 2</text>
+  <!-- Stage 2 -->
+  <rect class="card" x="482" y="48" width="188" height="196"/>
+  <rect class="badge-accent" x="494" y="60" width="72" height="20"/>
+  <text class="badge-txt" x="530" y="74" text-anchor="middle">STAGE 2</text>
+  <text class="title" x="494" y="100">Unguided Discovery</text>
+  <text class="body" x="494" y="122">• Pass 1: Zero-hint full</text>
+  <text class="body" x="494" y="137">  workflow completion</text>
+  <text class="body" x="494" y="157">• Pass 2: Goal-only nudge</text>
+  <text class="body" x="494" y="172">  for Ghost Features</text>
+  <text class="body" x="494" y="192">• Diff vs. Secret Ledger</text>
+  <text class="mono-warn" x="494" y="226">X/N &amp; Y/M scored</text>
 
-  <!-- Loopback arrow Gate -> Phase 1 -->
-  <path class="arrow-accent" d="M 562 236 L 562 262 L 334 262 L 334 240" marker-end="url(#head-accent)"/>
-  <text class="mono" x="448" y="256" text-anchor="middle" fill="#fb923c">fresh eyes retest</text>
+  <!-- Gate 2 Pill -->
+  <line class="arrow-accent" x1="670" y1="146" x2="686" y2="146"/>
+  <rect class="gate" x="686" y="96" width="54" height="100"/>
+  <text class="gate-txt" x="713" y="132" text-anchor="middle">🔒</text>
+  <text class="gate-txt" x="713" y="150" text-anchor="middle">GATE</text>
+  <text class="gate-txt" x="713" y="166" text-anchor="middle">02</text>
+  <line class="arrow-accent" x1="740" y1="146" x2="754" y2="146" marker-end="url(#head-accent)"/>
 
-  <!-- Arrow Gate -> Phase 2 -->
-  <line class="arrow" x1="654" y1="145" x2="684" y2="145" marker-end="url(#head)"/>
+  <!-- Stage 3 -->
+  <rect class="card" x="758" y="48" width="182" height="196"/>
+  <rect class="badge" x="770" y="60" width="72" height="20"/>
+  <text class="badge-txt" x="806" y="74" text-anchor="middle">STAGE 3</text>
+  <text class="title" x="770" y="100">Fluency &amp; Linkage</text>
+  <text class="body" x="770" y="122">• Feedback &amp; CLS check</text>
+  <text class="body" x="770" y="142">• Double-submit &amp; drafts</text>
+  <text class="body" x="770" y="162">• 5+ cross-view syncs</text>
+  <text class="body" x="770" y="182">• 0 → 1 → N → 0 lifecycle</text>
+  <text class="mono-warn" x="770" y="226">F5 refresh forbidden</text>
 
-  <!-- Step 2: Phase 2 -->
-  <rect class="card" x="688" y="54" width="210" height="182"/>
-  <rect class="badge" x="702" y="68" width="76" height="20"/>
-  <text class="badge-txt" x="740" y="82" text-anchor="middle">PHASE 2</text>
-  <text class="title" x="702" y="112">Fluency &amp; Linkage</text>
-  <text class="body" x="702" y="134">• Instant feedback &amp; CLS</text>
-  <text class="body" x="702" y="154">• Double-click &amp; draft guard</text>
-  <text class="body" x="702" y="174">• Cross-page state sync</text>
-  <text class="body" x="702" y="194">• 0 → 1 → N → 0 lifecycle</text>
-  <text class="mono" x="702" y="220" fill="#fca5a5">F5 refresh forbidden</text>
+  <!-- Bottom fresh-eyes loop bar -->
+  <path class="arrow-accent" d="M 437 196 L 437 272 L 307 272 L 307 248" marker-end="url(#head-accent)"/>
+  <path class="arrow-accent" d="M 713 196 L 713 272 L 576 272 L 576 248" marker-end="url(#head-accent)"/>
+  <rect x="295" y="261" width="430" height="20" rx="10" fill="#2b1a14" stroke="#6e3927" stroke-width="1"/>
+  <text class="gate-txt" x="510" y="275" text-anchor="middle">each gate: confirm fixes → patch → brand-new blind agent retest</text>
 </svg>

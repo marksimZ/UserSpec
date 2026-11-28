@@ -52,10 +52,10 @@
   <rect class="dot-accent" x="536" y="74" width="18" height="6"/>
   <rect class="dot-off" x="558" y="74" width="18" height="6"/>
 
-  <text class="title" x="340" y="114">Two-Stage Hard Gate</text>
-  <text class="body" x="340" y="138">• Blind Stage 1 → confirm &amp; patch</text>
-  <text class="body" x="340" y="158">• Fresh-subject Stage 1 re-verify</text>
-  <text class="body" x="340" y="178">• Stage 2 fluency &amp; 5+ F5-free links</text>
+  <text class="title" x="340" y="114">Three-Stage Hard Gate</text>
+  <text class="body" x="340" y="138">• Stage 1: 5s comprehension &amp; copy gate</text>
+  <text class="body" x="340" y="158">• Stage 2: Unguided full-workflow sweep</text>
+  <text class="body" x="340" y="178">• Stage 3: Fluency &amp; 5+ F5-free links</text>
   <rect class="pill-foot" x="340" y="198" width="164" height="24"/>
   <text class="foot-txt" x="422" y="214" text-anchor="middle">USER-APPROVED FIXES</text>
 

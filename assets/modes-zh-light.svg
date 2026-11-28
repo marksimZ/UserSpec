@@ -50,10 +50,10 @@
   <rect class="dot-accent" x="536" y="74" width="18" height="6"/>
   <rect class="dot-off" x="558" y="74" width="18" height="6"/>
 
-  <text class="title" x="340" y="114">标准两阶段门禁</text>
-  <text class="body" x="340" y="138">• 盲测阶段一 → 确认并修复首屏</text>
-  <text class="body" x="340" y="158">• 派遣全新盲测受试者复检过关</text>
-  <text class="body" x="340" y="178">• 阶段二流畅度 + 5+ 条无 F5 联动</text>
+  <text class="title" x="340" y="114">标准三阶段门禁</text>
+  <text class="body" x="340" y="138">• 阶段一：5 秒首屏与去开发腔门禁</text>
+  <text class="body" x="340" y="158">• 阶段二：无提示全功能与工作流跑通</text>
+  <text class="body" x="340" y="178">• 阶段三：流畅度 + 5+ 条无 F5 联动</text>
   <rect class="pill-foot" x="340" y="198" width="106" height="24"/>
   <text class="foot-txt" x="393" y="214" text-anchor="middle">确认后修复</text>
 
